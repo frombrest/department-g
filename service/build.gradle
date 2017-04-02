@@ -1,0 +1,9 @@
+ext {
+    JACKSON_VERSION = '2.8.7'
+}
+
+dependencies {
+    compile project(":model")
+    compile project(":dao")
+    compile "com.fasterxml.jackson.core:jackson-databind:${JACKSON_VERSION}"
+}

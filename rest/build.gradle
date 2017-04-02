@@ -1,0 +1,23 @@
+apply plugin: 'war'
+
+ext {
+    JACKSON_VERSION = '2.8.6'
+    SERVLET_API_VERSION = '3.1.0'
+}
+
+war{
+    archiveName "${WAR_FILE_RESTAPP_NAME}.war"
+    destinationDir file("$buildDir/../../")
+}
+
+clean.doLast {
+    file("$buildDir/../../${WAR_FILE_RESTAPP_NAME}.war").delete()
+}
+
+dependencies {
+    compile project(":model")
+    compile project(":dao")
+    compile project(":service")
+    compile "com.fasterxml.jackson.core:jackson-databind:${JACKSON_VERSION}"
+    compile "javax.servlet:javax.servlet-api:${SERVLET_API_VERSION}"
+}

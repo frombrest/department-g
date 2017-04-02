@@ -1,0 +1,8 @@
+ext {
+    HSQLDB_VERSION = '2.3.4'
+}
+
+dependencies {
+    compile "org.hsqldb:hsqldb:${HSQLDB_VERSION}"
+    compile project(":model")
+}

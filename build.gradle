@@ -1,0 +1,44 @@
+ext {
+    WAR_FILE_RESTAPP_NAME = 'departmentrest'
+    WAR_FILE_WEBAPP_NAME = 'departmentweb'
+}
+
+allprojects{
+    group 'com.pai'
+    version '1.0-SNAPSHOT'
+}
+
+subprojects{
+
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'base'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+
+    ext{
+        LOG4J2_VERSION = '2.8.1'
+        JUNIT_VERSION = '4.12'
+        SPRING_VERSION = '4.3.7.RELEASE'
+    }
+
+    dependencies {
+        compile "org.apache.logging.log4j:log4j-api:${LOG4J2_VERSION}"
+        compile "org.apache.logging.log4j:log4j-core:${LOG4J2_VERSION}"
+        compile "org.springframework:spring-core:${SPRING_VERSION}"
+        compile "org.springframework:spring-jdbc:${SPRING_VERSION}"
+        compile "org.springframework:spring-context:${SPRING_VERSION}"
+        compile "org.springframework:spring-webmvc:${SPRING_VERSION}"
+
+        testCompile "junit:junit:${JUNIT_VERSION}"
+        testCompile "org.springframework:spring-test:${SPRING_VERSION}"
+    }
+
+}

@@ -1,0 +1,36 @@
+apply plugin: 'war'
+
+ext {
+    JACKSON_VERSION = '2.8.7'
+    SERVLET_API_VERSION = '3.1.0'
+    JSTL_VERSION = '1.2'
+    MOCKITO_VERSION = '2.7.15'
+}
+
+
+war{
+    archiveName "${WAR_FILE_WEBAPP_NAME}.war"
+    destinationDir file("$buildDir/../../")
+}
+
+clean.doLast {
+    file("$buildDir/../../${WAR_FILE_WEBAPP_NAME}.war").delete()
+}
+
+ext {
+    JACKSON_VERSION = '2.8.7'
+    SERVLET_API_VERSION = '3.1.0'
+    JSTL_VERSION = '1.2'
+    MOCKITO_VERSION = '2.7.15'
+}
+
+dependencies {
+    compile project(":model")
+    compile project(":dao")
+    compile project(":service")
+    compile "com.fasterxml.jackson.core:jackson-databind:${JACKSON_VERSION}"
+    compile "javax.servlet:javax.servlet-api:${SERVLET_API_VERSION}"
+    compile "javax.servlet:jstl:${JSTL_VERSION}"
+
+    testCompile "org.mockito:mockito-core:${MOCKITO_VERSION}"
+}
