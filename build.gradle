@@ -1,8 +1,3 @@
-ext {
-    WAR_FILE_RESTAPP_NAME = 'departmentrest'
-    WAR_FILE_WEBAPP_NAME = 'departmentweb'
-}
-
 allprojects{
     group 'com.pai'
     version '1.0-SNAPSHOT'
@@ -27,6 +22,16 @@ subprojects{
         LOG4J2_VERSION = '2.8.1'
         JUNIT_VERSION = '4.12'
         SPRING_VERSION = '4.3.7.RELEASE'
+        WAR_FILE_RESTAPP_NAME = 'departmentrest'
+        WAR_FILE_WEBAPP_NAME = 'departmentweb'
+
+        /*TOMCAT settings:*/
+
+        TOMCAT_VERSION = 'tomcat8x'
+        TOMCAT_DEFAULT_PORT = 8080
+        TOMCAT_HOSTNAME = 'localhost'
+        TOMCAT_MANAGER_NAME = 'manager'
+        TOMCAT_MANAGER_PASSWORD = 'Password01'
     }
 
     dependencies {
