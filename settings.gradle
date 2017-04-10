@@ -4,4 +4,6 @@ include 'model'
 include 'service'
 include 'rest'
 include 'webapp'
+include 'schema'
+include 'ws'
 
