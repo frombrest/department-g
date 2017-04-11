@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://localhost:8080/department-soap/types"
+        elementFormDefault="qualified">
+
+    <complexType name="Employee">
+        <sequence>
+            <element name="id" type="int"/>
+            <element name="full_name" type="string"/>
+            <element name="date_of_birth" type="date"/>
+            <element name="department_id" type="int"/>
+            <element name="salary" type="double"/>
+        </sequence>
+    </complexType>
+
+    <complexType name="Department">
+        <sequence>
+            <element name="id" type="int"/>
+            <element name="name" type="string"/>
+        </sequence>
+    </complexType>
+
+</schema>

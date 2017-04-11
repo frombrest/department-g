@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://localhost:8080/department-soap/messages"
+        xmlns:types="http://localhost:8080/department-soap/types"
+        elementFormDefault="qualified">
+
+    <import namespace="http://localhost:8080/department-soap/types"
+            schemaLocation="types.xsd"/>
+
+    <!--Section of department operations-->
+
+    <element name="GetAllDepartmentsRequest" nillable="true" type="string"/>
+
+    <element name="GetAllDepartmentsResponse">
+        <complexType>
+            <sequence>
+                <element name="department" type="types:Department" minOccurs="0" maxOccurs="unbounded"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="GetDepartmentByIdRequest">
+        <complexType>
+            <sequence>
+                <element name="department_id" type="int" minOccurs="1" maxOccurs="1"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="GetDepartmentByIdResponse">
+        <complexType>
+            <sequence>
+                <element name="department" type="types:Department" minOccurs="0" maxOccurs="1"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="AddDepartmentRequest">
+        <complexType>
+            <sequence>
+                <element name="name" type="string" minOccurs="1" maxOccurs="1"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="AddDepartmentResponse" type="string"/>
+
+    <element name="UpdateDepartmentRequest">
+        <complexType>
+            <sequence>
+                <element name="department" type="types:Department" minOccurs="1" maxOccurs="1"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="UpdateDepartmentResponse" type="string"/>
+
+    <element name="DeleteDepartmentRequest">
+        <complexType>
+            <sequence>
+                <element name="department_id" type="int" minOccurs="1" maxOccurs="1"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="DeleteDepartmentResponse" type="string"/>
+
+    <!--Section of employee operations-->
+
+    <element name="GetAllEmployeesRequest" nillable="true" type="string"/>
+
+    <element name="GetAllEmployeesResponse">
+        <complexType>
+            <sequence>
+                <element name="employee" type="types:Employee" minOccurs="0" maxOccurs="unbounded"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="GetEmployeesByDepartmentIdRequest">
+        <complexType>
+            <sequence>
+                <element name="department_id" type="int" minOccurs="1" maxOccurs="1"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="GetEmployeesByDepartmentIdResponse">
+        <complexType>
+            <sequence>
+                <element name="employee" type="types:Employee" minOccurs="0" maxOccurs="unbounded"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="GetEmployeesByIdRequest">
+        <complexType>
+            <sequence>
+                <element name="employee_id" type="int" minOccurs="1" maxOccurs="1"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="GetEmployeesByIdResponse">
+        <complexType>
+            <sequence>
+                <element name="employee" type="types:Employee" minOccurs="0" maxOccurs="1"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="AddEmployeeRequest">
+        <complexType>
+            <all>
+                <element name="full_name" type="string"/>
+                <element name="date_of_birth" type="date"/>
+                <element name="department_id" type="int"/>
+                <element name="salary" type="double"/>
+            </all>
+        </complexType>
+    </element>
+
+    <element name="AddEmployeeResponse" type="string"/>
+
+    <element name="UpdateEmployeeRequest">
+        <complexType>
+            <sequence>
+                <element name="employee" type="types:Employee" minOccurs="1" maxOccurs="1"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="UpdateEmployeeResponse" type="string"/>
+
+    <element name="DeleteEmployeeRequest">
+        <complexType>
+            <sequence>
+                <element name="employee_id" type="int" minOccurs="1" maxOccurs="1"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <element name="DeleteEmployeeResponse" type="string"/>
+
+    <!--end-->
+
+</schema>

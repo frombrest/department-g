@@ -1,3 +1,60 @@
+plugins {
+    id "com.bmuschko.cargo" version "2.2.3"
+}
+
+plugins {
+    id 'com.intershop.gradle.jaxb' version '2.0.0'
+}
+
+apply plugin: 'java'
+/*apply plugin: "com.intershop.gradle.jaxb"*/
+apply plugin: 'war'
+apply plugin: 'com.bmuschko.cargo'
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
+}
+
 dependencies {
+
     testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    compile project(":dao")
+    compile project(":model")
+    compile project(":schema")
+    compile project(":service")
+    compile "javax.servlet:javax.servlet-api:3.1.0"
+    compile "org.springframework.ws:spring-ws-core:2.4.0.RELEASE"
+    compile "wsdl4j:wsdl4j:1.6.2"
+
+    compileClasspath "gradle.plugin.com.intershop.gradle.jaxb:jaxb-gradle-plugin:2.0.0"
+    compileClasspath "com.bmuschko:gradle-cargo-plugin:2.2.3"
+}
+
+jaxb {
+    javaGen {
+        ublConfig {
+            packageName = 'com.pai.schema'
+            schema = file("src/main/resources/messages.xsd")
+            outputDir = file("../schema/src/main/java")
+        }
+    }
+}
+
+war{
+    archiveName "department-soap.war"
+}
+
+cargo {
+    containerId = "tomcat8x"
+    port = "8080" as Integer
+    remote {
+        hostname = "localhost"
+        username = "manager"
+        password = "Password01"
+    }
 }
