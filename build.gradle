@@ -24,6 +24,7 @@ subprojects{
         SPRING_VERSION = '4.3.7.RELEASE'
         WAR_FILE_RESTAPP_NAME = 'departmentrest'
         WAR_FILE_WEBAPP_NAME = 'departmentweb'
+        WAR_FILE_SOAPAPP_NAME = 'department-soap'
 
         /*TOMCAT settings:*/
 

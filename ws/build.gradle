@@ -7,7 +7,7 @@ plugins {
 }
 
 apply plugin: 'java'
-/*apply plugin: "com.intershop.gradle.jaxb"*/
+apply plugin: "com.intershop.gradle.jaxb"
 apply plugin: 'war'
 apply plugin: 'com.bmuschko.cargo'
 
@@ -30,6 +30,7 @@ dependencies {
     compile "javax.servlet:javax.servlet-api:3.1.0"
     compile "org.springframework.ws:spring-ws-core:2.4.0.RELEASE"
     compile "wsdl4j:wsdl4j:1.6.2"
+    compile "org.apache.ws.xmlschema:xmlschema-core:2.0.1"
 
     compileClasspath "gradle.plugin.com.intershop.gradle.jaxb:jaxb-gradle-plugin:2.0.0"
     compileClasspath "com.bmuschko:gradle-cargo-plugin:2.2.3"
@@ -46,7 +47,8 @@ jaxb {
 }
 
 war{
-    archiveName "department-soap.war"
+    archiveName "${WAR_FILE_SOAPAPP_NAME}.war"
+    destinationDir file("$buildDir/../../")
 }
 
 cargo {
@@ -57,4 +59,8 @@ cargo {
         username = "manager"
         password = "Password01"
     }
+}
+
+clean.doLast {
+    file("$buildDir/../../${WAR_FILE_SOAPAPP_NAME}.war").delete()
 }

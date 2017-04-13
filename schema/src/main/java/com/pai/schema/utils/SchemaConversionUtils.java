@@ -2,31 +2,33 @@ package com.pai.schema.utils;
 
 import com.pai.schema.Department;
 import com.pai.schema.Employee;
-
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.sql.Date;
-import java.util.GregorianCalendar;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 /**
  * Created by frombrest on 11.4.17.
  */
 public class SchemaConversionUtils {
 
+    private final static String FORMATER = "yyyy-MM-dd";
+
     private static XMLGregorianCalendar toXMLGregorianCalendar(Date date) throws DatatypeConfigurationException{
-        GregorianCalendar gCalendar = new GregorianCalendar();
-        gCalendar.setTime(date);
-        XMLGregorianCalendar xmlCalendar = null;
-        xmlCalendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(gCalendar);
+        DateFormat format = new SimpleDateFormat(FORMATER);
+        java.util.Date dt = new java.util.Date(date.getTime());
+        XMLGregorianCalendar xmlCalendar;
+        xmlCalendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(format.format(dt));
         return xmlCalendar;
     }
 
-    private static Date toSQLDate(XMLGregorianCalendar xmlGregorianCalendar){
+    public static Date toSQLDate(XMLGregorianCalendar xmlGregorianCalendar){
         if(xmlGregorianCalendar == null) {
             return null;
         }
-        return (java.sql.Date)xmlGregorianCalendar.toGregorianCalendar().getTime();
+        return new java.sql.Date(xmlGregorianCalendar.toGregorianCalendar().getTime().getTime());
     }
 
     public static Department toSchemaType(com.pai.model.Department modelDepartment){
