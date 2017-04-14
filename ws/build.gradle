@@ -22,6 +22,7 @@ repositories {
 dependencies {
 
     testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'org.easymock', name: 'easymock', version: '3.4'
 
     compile project(":dao")
     compile project(":model")
@@ -36,6 +37,7 @@ dependencies {
     compileClasspath "com.bmuschko:gradle-cargo-plugin:2.2.3"
 }
 
+/*Auto generated java classes for XML Schema*/
 jaxb {
     javaGen {
         ublConfig {
@@ -51,6 +53,7 @@ war{
     destinationDir file("$buildDir/../../")
 }
 
+/*Deploying to tomcat*/
 cargo {
     containerId = "tomcat8x"
     port = "8080" as Integer

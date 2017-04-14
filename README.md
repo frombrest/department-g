@@ -1,11 +1,11 @@
-Department (Gradle)
-===================
+Department SOAP (Gradle)
+========================
 
 The project consists of two cooperating applications, designed to work with information about employees and departments.
 
-**departmentrest.war** — REST service providing access to a database of employees and departments.
+**department-soap.war** — SOAP service providing access to a database of employees and departments.
 
-**departmentweb.war** — Web application providing an interface for working with the REST service.
+**departmentweb.war** — Web application providing an interface for working with the SOAP service.
 
 Usage
 -----
@@ -29,9 +29,9 @@ Set (change) your tomcat settings in **${projectDir}/build.gradle**
 
 Use comands:
 
-    $ gradle :rest:cargoDeployRemote
-    $ gradle :rest:cargoUndeployRemote
-    $ gradle :rest:cargoRedeployRemote
+    $ gradle :ws:cargoDeployRemote
+    $ gradle :ws:cargoUndeployRemote
+    $ gradle :ws:cargoRedeployRemote
 
     $ gradle :webapp:cargoDeployRemote
     $ gradle :webapp:cargoUndeployRemote
@@ -39,10 +39,9 @@ Use comands:
 
 Access addresses:
 
-**departmentrest.war**
+**department-soap.war**
 
-    http://localhost:8080/departmentrest/department
-    http://localhost:8080/departmentrest/employee
+    http://localhost:8080/department-soap/messages.wsdl
 
 **departmentweb.war**
 
