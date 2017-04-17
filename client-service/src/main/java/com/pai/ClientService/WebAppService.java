@@ -1,9 +1,7 @@
-package com.pai.service;
+package com.pai.ClientService;
 
 import com.pai.model.Department;
 import com.pai.model.Employee;
-import org.springframework.web.client.RestClientException;
-
 import java.util.List;
 import java.util.Map;
 
@@ -45,63 +43,63 @@ public interface WebAppService {
      * Method perform request to REST service for create department
      * @param department entity of the created department
      */
-    void createDepartment(Department department) throws RestClientException;
+    void createDepartment(Department department);
 
     /**
      * Method perform request to REST service to get department entity with the same id
      * @param id ID of the target department
      * @return Department entity
      */
-    Department getDepartmentById(int id) throws RestClientException;
+    Department getDepartmentById(int id);
 
     /**
      * Method perform request to REST service to get an array of all departments
      * @return Array of departments entity
      */
-    Department[] getDepartments() throws RestClientException;
+    Department[] getDepartments();
 
     /**
      * Method perform request to REST service for updating department
      * @param department entity of the modified department
      */
-    void updateDepartment(Department department) throws RestClientException;
+    void updateDepartment(Department department);
 
     /**
      * Method perform request to REST service for delete employee
      * @param id of the deletable employee
      */
-    void deleteDepartmentById(int id) throws RestClientException;
+    void deleteDepartmentById(int id);
 
     /**
      * Method perform request to REST service for create employee
      * @param employee entity of the created employee
      */
-    void createEmployee(Employee employee) throws RestClientException;
+    void createEmployee(Employee employee);
 
     /**
      * Method perform request to REST service to get employee entity with the same id
      * @param id ID of the target employee
      * @return employee entity
      */
-    Employee getEmployeeById(int id) throws RestClientException;
+    Employee getEmployeeById(int id);
 
     /**
      * Method perform request to REST service to get an array of employees of the target department
      * @param id ID of the target department
      * @return array of emploees entity
      */
-    Employee[] getEmployeesByDepartmentId(int id) throws RestClientException;
+    Employee[] getEmployeesByDepartmentId(int id);
 
     /**
      * Method perform request to REST service for updating employee
      * @param employee entity of the modified employee
      */
-    void updateEmployee(Employee employee) throws RestClientException;
+    void updateEmployee(Employee employee);
 
     /**
      * Method perform request to REST service for removal employee with the same id
      * @param id ID of the deletable employee
      */
-    void deleteEmployeeById(int id) throws RestClientException;
+    void deleteEmployeeById(int id);
 
 }

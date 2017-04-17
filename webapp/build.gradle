@@ -1,32 +1,40 @@
 plugins {
     id "com.bmuschko.cargo" version "2.2.3"
-}
-
-ext {
-    JACKSON_VERSION = '2.8.7'
-    SERVLET_API_VERSION = '3.1.0'
-    JSTL_VERSION = '1.2'
-    MOCKITO_VERSION = '2.7.15'
-}
-
-dependencies {
-    compile project(":model")
-    compile project(":dao")
-    compile project(":service")
-    compile "com.fasterxml.jackson.core:jackson-databind:${JACKSON_VERSION}"
-    compile "javax.servlet:javax.servlet-api:${SERVLET_API_VERSION}"
-    compile "javax.servlet:jstl:${JSTL_VERSION}"
-    compileClasspath "com.bmuschko:gradle-cargo-plugin:2.2.3"
-
-    testCompile "org.mockito:mockito-core:${MOCKITO_VERSION}"
+    id "com.intershop.gradle.jaxb" version "2.0.0"
 }
 
 apply plugin: 'war'
 apply plugin: 'com.bmuschko.cargo'
+apply plugin: "com.intershop.gradle.jaxb"
+
+dependencies {
+
+    compile project(":model")
+    compile project(":client-schema")
+    compile project(":client-service")
+    compile "javax.servlet:javax.servlet-api:${SERVLET_API_VERSION}"
+    compile "javax.servlet:jstl:${JSTL_VERSION}"
+    compile "org.springframework.ws:spring-ws-core:${SPRING_WS_VERSION}"
+
+    compileClasspath "gradle.plugin.com.intershop.gradle.jaxb:jaxb-gradle-plugin:${JAXB_GRADLE_PLUGIN}"
+    compileClasspath "com.bmuschko:gradle-cargo-plugin:${CARGO_GRADLE_PLUGIN}"
+}
 
 war{
     archiveName "${WAR_FILE_WEBAPP_NAME}.war"
     destinationDir file("$buildDir/../../")
+}
+
+/*Auto generated java classes from WSDL*/
+jaxb {
+    javaGen {
+        ublConfig {
+            packageName = 'com.pai.ClientSchema'
+            schema = file("src/main/resources/messages.wsdl")
+            outputDir = file("../client-schema/src/main/java")
+            language = 'WSDL'
+        }
+    }
 }
 
 cargo {
@@ -42,12 +50,4 @@ cargo {
 clean.doLast {
     file("$buildDir/../../${WAR_FILE_WEBAPP_NAME}.war").delete()
 }
-
-ext {
-    JACKSON_VERSION = '2.8.7'
-    SERVLET_API_VERSION = '3.1.0'
-    JSTL_VERSION = '1.2'
-    MOCKITO_VERSION = '2.7.15'
-}
-
 

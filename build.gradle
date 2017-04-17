@@ -8,6 +8,9 @@ subprojects{
     repositories {
         mavenCentral()
         jcenter()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
 
     apply plugin: 'java'
@@ -19,10 +22,25 @@ subprojects{
 
 
     ext{
+
         LOG4J2_VERSION = '2.8.1'
+        EASYMOCK_VERSION = '3.4'
         JUNIT_VERSION = '4.12'
+
         SPRING_VERSION = '4.3.7.RELEASE'
-        WAR_FILE_RESTAPP_NAME = 'departmentrest'
+        SPRING_WS_VERSION = '2.4.0.RELEASE'
+
+        HSQLDB_VERSION = '2.3.4'
+
+        SERVLET_API_VERSION = '3.1.0'
+        JSTL_VERSION = '1.2'
+
+        JAXB_GRADLE_PLUGIN = '2.0.0'
+        CARGO_GRADLE_PLUGIN = '2.2.3'
+
+        WSDL4J_VERSION = '1.6.2'
+        APACHE_WS_XMLSCHEMA_CORE_VERSION = '2.0.1'
+
         WAR_FILE_WEBAPP_NAME = 'departmentweb'
         WAR_FILE_SOAPAPP_NAME = 'department-soap'
 
@@ -39,12 +57,13 @@ subprojects{
         compile "org.apache.logging.log4j:log4j-api:${LOG4J2_VERSION}"
         compile "org.apache.logging.log4j:log4j-core:${LOG4J2_VERSION}"
         compile "org.springframework:spring-core:${SPRING_VERSION}"
-        compile "org.springframework:spring-jdbc:${SPRING_VERSION}"
         compile "org.springframework:spring-context:${SPRING_VERSION}"
         compile "org.springframework:spring-webmvc:${SPRING_VERSION}"
 
         testCompile "junit:junit:${JUNIT_VERSION}"
         testCompile "org.springframework:spring-test:${SPRING_VERSION}"
+        testCompile group: 'org.easymock', name: 'easymock', version: "${EASYMOCK_VERSION}"
+
     }
 
 }

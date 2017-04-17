@@ -1,40 +1,26 @@
 plugins {
     id "com.bmuschko.cargo" version "2.2.3"
+    id "com.intershop.gradle.jaxb" version "2.0.0"
 }
 
-plugins {
-    id 'com.intershop.gradle.jaxb' version '2.0.0'
-}
-
-apply plugin: 'java'
-apply plugin: "com.intershop.gradle.jaxb"
 apply plugin: 'war'
 apply plugin: 'com.bmuschko.cargo'
-
-repositories {
-    mavenCentral()
-    jcenter()
-    maven {
-        url "https://plugins.gradle.org/m2/"
-    }
-}
+apply plugin: 'com.intershop.gradle.jaxb'
 
 dependencies {
-
-    testCompile group: 'junit', name: 'junit', version: '4.12'
-    testCompile group: 'org.easymock', name: 'easymock', version: '3.4'
 
     compile project(":dao")
     compile project(":model")
     compile project(":schema")
     compile project(":service")
-    compile "javax.servlet:javax.servlet-api:3.1.0"
-    compile "org.springframework.ws:spring-ws-core:2.4.0.RELEASE"
-    compile "wsdl4j:wsdl4j:1.6.2"
-    compile "org.apache.ws.xmlschema:xmlschema-core:2.0.1"
+    compile "javax.servlet:javax.servlet-api:${SERVLET_API_VERSION}"
+    compile "javax.servlet:jstl:${JSTL_VERSION}"
+    compile "org.springframework.ws:spring-ws-core:${SPRING_WS_VERSION}"
+    compile "wsdl4j:wsdl4j:${WSDL4J_VERSION}"
+    compile "org.apache.ws.xmlschema:xmlschema-core:${APACHE_WS_XMLSCHEMA_CORE_VERSION}"
 
-    compileClasspath "gradle.plugin.com.intershop.gradle.jaxb:jaxb-gradle-plugin:2.0.0"
-    compileClasspath "com.bmuschko:gradle-cargo-plugin:2.2.3"
+    compileClasspath "gradle.plugin.com.intershop.gradle.jaxb:jaxb-gradle-plugin:${JAXB_GRADLE_PLUGIN}"
+    compileClasspath "com.bmuschko:gradle-cargo-plugin:${CARGO_GRADLE_PLUGIN}"
 }
 
 /*Auto generated java classes for XML Schema*/
@@ -55,12 +41,12 @@ war{
 
 /*Deploying to tomcat*/
 cargo {
-    containerId = "tomcat8x"
-    port = "8080" as Integer
+    containerId = "${TOMCAT_VERSION}"
+    port = "${TOMCAT_DEFAULT_PORT}" as Integer
     remote {
-        hostname = "localhost"
-        username = "manager"
-        password = "Password01"
+        hostname = "${TOMCAT_HOSTNAME}"
+        username = "${TOMCAT_MANAGER_NAME}"
+        password = "${TOMCAT_MANAGER_PASSWORD}"
     }
 }
 

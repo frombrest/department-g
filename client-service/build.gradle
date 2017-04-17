@@ -1,0 +1,5 @@
+dependencies {
+    compile project(":model")
+    compile project(":client-schema")
+    compile("org.springframework.ws:spring-ws-core:${SPRING_WS_VERSION}")
+    }

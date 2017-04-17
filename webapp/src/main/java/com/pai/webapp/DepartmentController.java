@@ -2,7 +2,7 @@ package com.pai.webapp;
 
 import com.pai.model.Department;
 import com.pai.model.Employee;
-import com.pai.service.WebAppService;
+import com.pai.ClientService.WebAppService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * Class uses the library Sprting Web MVC to implement
- * the Web application interacting with a REST Service
+ * the Web application interacting with a SOAP Service
  *
  * @author Aliaksandr Parfianiuk frombrest@gmail.com
  *

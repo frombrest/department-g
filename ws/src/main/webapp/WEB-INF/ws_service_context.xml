@@ -18,9 +18,7 @@
 
     <sws:annotation-driven />
 
-    <context:component-scan base-package="com.pai.service">
-        <context:exclude-filter type="assignable" expression="com.pai.service.WebAppServiceImpl"/>
-    </context:component-scan>
+    <context:component-scan base-package="com.pai.service"/>
 
     <sws:dynamic-wsdl id="messages" portTypeName="messages" locationUri="/messages" targetNamespace="http://localhost:8080/department-soap/service">
         <sws:xsd location="classpath:messages.xsd" />
