@@ -12,27 +12,27 @@
 
 
     <mvc:annotation-driven/>
+    <context:component-scan base-package="com.pai.webapp"/>
 
-    <bean id="departmentController" class="com.pai.webapp.DepartmentController"/>
-
-    <bean id="webappService" class="org.mockito.Mockito" factory-method="mock">
-        <constructor-arg value="com.pai.service.WebAppServiceImpl"/>
-    </bean>
+    <bean id="messageFactory" class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory"/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/classes/" />
         <property name="suffix" value=".jsp" />
     </bean>
 
-    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
-        <property name="messageConverters">
-            <list>
-                <ref bean="mappingJackson2HttpMessageConverter"/>
-            </list>
-        </property>
+    <bean id="abstractClient" abstract="true">
+        <constructor-arg ref="messageFactory"/>
+        <property name="defaultUri" value="http://localhost:8080/department-soap/messages"/>
     </bean>
 
-    <bean id="mappingJackson2HttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
+    <bean id="marshaller" class="org.springframework.oxm.jaxb.Jaxb2Marshaller">
+        <property name="ContextPath" value="com.pai.ClientSchema"/>
+    </bean>
 
+    <bean id="webAppService" parent="abstractClient" class="com.pai.ClientService.WebAppServiceImpl">
+        <property name="marshaller" ref="marshaller"/>
+        <property name="unmarshaller" ref="marshaller"/>
+    </bean>
 
 </beans>

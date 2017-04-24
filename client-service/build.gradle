@@ -2,4 +2,6 @@ dependencies {
     compile project(":model")
     compile project(":client-schema")
     compile("org.springframework.ws:spring-ws-core:${SPRING_WS_VERSION}")
+    testCompile("org.springframework.ws:spring-ws-test:${SPRING_WS_VERSION}")
+    testCompile("javax.servlet:javax.servlet-api:${SERVLET_API_VERSION}")
     }
