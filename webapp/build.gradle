@@ -22,6 +22,8 @@ dependencies {
     testCompile "org.mockito:mockito-core:2.7.15"
     testCompile project(":webapp")
     testCompile project(":client-service")
+    testCompile("org.springframework.ws:spring-ws-test:${SPRING_WS_VERSION}")
+    testCompile("javax.servlet:javax.servlet-api:${SERVLET_API_VERSION}")
 
 }
 

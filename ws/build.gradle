@@ -19,6 +19,8 @@ dependencies {
     compile "wsdl4j:wsdl4j:${WSDL4J_VERSION}"
     compile "org.apache.ws.xmlschema:xmlschema-core:${APACHE_WS_XMLSCHEMA_CORE_VERSION}"
 
+
+
     compileClasspath "gradle.plugin.com.intershop.gradle.jaxb:jaxb-gradle-plugin:${JAXB_GRADLE_PLUGIN}"
     compileClasspath "com.bmuschko:gradle-cargo-plugin:${CARGO_GRADLE_PLUGIN}"
 }
