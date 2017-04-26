@@ -1,5 +1,6 @@
 dependencies {
     compile "org.hsqldb:hsqldb:${HSQLDB_VERSION}"
+    compile "org.mybatis:mybatis:3.4.4"
     compile "org.springframework:spring-jdbc:${SPRING_VERSION}"
     compile project(":model")
 }

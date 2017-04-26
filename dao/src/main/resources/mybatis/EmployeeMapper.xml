@@ -1,0 +1,28 @@
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pai.dao.EmployeeDAO">
+
+    <select id="getById" parameterType="java.lang.Integer" resultType="com.pai.model.Employee">
+        SELECT * FROM "TW"."Employee" WHERE "id" = #{id}
+    </select>
+
+    <select id="getByDepartmentId" parameterType="java.lang.Integer" resultType="com.pai.model.Employee">
+        SELECT * FROM "TW"."Employee" WHERE "department_id" = #{id}
+    </select>
+
+    <select id="getAll"  resultType="com.pai.model.Employee">
+        SELECT * FROM "TW"."Employee"
+    </select>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        DELETE FROM "TW"."Employee" WHERE "id"= #{id}
+    </delete>
+
+    <insert id="create" parameterType="com.pai.model.Employee">
+        INSERT INTO "TW"."Employee" ("full_name", "date_of_birth", "department_id", "salary") VALUES (#{full_name}, #{date_of_birth}, #{department_id}, #{salary})
+    </insert>
+
+    <update id="update" parameterType="com.pai.model.Employee">
+        UPDATE "TW"."Employee" SET "full_name"=#{full_name},"date_of_birth"=#{date_of_birth}, "department_id"=#{department_id}, "salary"=#{salary} WHERE "id"=#{id}
+    </update>
+
+</mapper>

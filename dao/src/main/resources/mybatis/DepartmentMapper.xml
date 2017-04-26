@@ -1,0 +1,24 @@
+<!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pai.dao.DepartmentDAO">
+
+    <select id="getById" parameterType="java.lang.Integer" resultType="com.pai.model.Department">
+        SELECT * FROM "TW"."Department" WHERE "id" = #{id}
+    </select>
+
+    <select id="getAll" resultType="com.pai.model.Department">
+        SELECT * FROM "TW"."Department"
+    </select>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        DELETE FROM "TW"."Department" WHERE "id" = #{id}
+    </delete>
+
+    <insert id="create" parameterType="com.pai.model.Department">
+        INSERT INTO "TW"."Department" ("name") VALUES (#{name})
+    </insert>
+
+    <update id="update" parameterType="com.pai.model.Department">
+        UPDATE "TW"."Department" SET "name"=#{name} WHERE "id"=#{id}
+    </update>
+
+</mapper>

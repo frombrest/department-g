@@ -1,3 +1,4 @@
+/*
 package com.pai.dao;
 
 import com.pai.model.Employee;
@@ -14,9 +15,11 @@ import java.sql.Date;
 
 import static org.junit.Assert.*;
 
+*/
 /**
  * Created by frombrest on 8.3.17.
- */
+ *//*
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:test-dao.xml"})
@@ -113,3 +116,4 @@ public class EmployeeJdbcDAOTest {
         Assert.assertEquals(employee.getFull_name(),employeeJdbcDAO.getById(newemployee.getId()).getFull_name());
     }
 }
+*/

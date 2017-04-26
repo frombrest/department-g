@@ -1,3 +1,4 @@
+/*
 package com.pai.dao;
 
 import org.junit.Assert;
@@ -10,9 +11,11 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.pai.model.Department;
 
+*/
 /**
  * Created by frombrest on 7.3.17.
- */
+ *//*
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:test-dao.xml"})
@@ -98,4 +101,4 @@ public class DepartmentJdbcDAOTest {
         Assert.assertTrue(thrown);
 
     }
-}
+}*/
