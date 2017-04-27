@@ -1,6 +1,15 @@
 <!DOCTYPE mapper     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.pai.dao.DepartmentDAO">
 
+    <!--
+    This file describes SQL queries for the interface
+    methods for accessing the entity "Department"
+
+    For each method, it is necessary to describe:
+    1. Types of parameters
+    2. Type of the returned value.
+    -->
+
     <select id="getById" parameterType="java.lang.Integer" resultType="com.pai.model.Department">
         SELECT * FROM "TW"."Department" WHERE "id" = #{id}
     </select>
