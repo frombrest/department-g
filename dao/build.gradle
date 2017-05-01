@@ -1,8 +1,10 @@
 ext {
     HSQLDB_VERSION = '2.3.4'
+    MYBATIS_VERSION = '3.4.4'
 }
 
 dependencies {
     compile "org.hsqldb:hsqldb:${HSQLDB_VERSION}"
+    compile "org.mybatis:mybatis:${MYBATIS_VERSION}"
     compile project(":model")
 }
