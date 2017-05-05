@@ -1,0 +1,32 @@
+plugins {
+    id "com.bmuschko.cargo" version "2.2.3"
+}
+
+dependencies {
+    compile project(":model")
+    compile project(":dao")
+
+    compileClasspath "com.bmuschko:gradle-cargo-plugin:2.2.3"
+}
+
+
+apply plugin: 'war'
+
+cargo {
+    containerId = "${TOMCAT_VERSION}"
+    port = "${TOMCAT_DEFAULT_PORT}" as Integer
+    remote {
+        hostname = "${TOMCAT_HOSTNAME}"
+        username = "${TOMCAT_MANAGER_NAME}"
+        password = "${TOMCAT_MANAGER_PASSWORD}"
+    }
+}
+
+war{
+    archiveName "${WAR_FILE_RESTAPP_NAME}.war"
+    destinationDir file("$buildDir/../../")
+}
+
+clean.doLast {
+    file("$buildDir/../../${WAR_FILE_RESTAPP_NAME}.war").delete()
+}

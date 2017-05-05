@@ -22,11 +22,11 @@ subprojects{
         LOG4J2_VERSION = '2.8.1'
         JUNIT_VERSION = '4.12'
         SPRING_VERSION = '4.3.7.RELEASE'
+        CAMEL_VERSION = '2.18.3'
         WAR_FILE_RESTAPP_NAME = 'departmentrest'
         WAR_FILE_WEBAPP_NAME = 'departmentweb'
 
         /*TOMCAT settings:*/
-
         TOMCAT_VERSION = 'tomcat8x'
         TOMCAT_DEFAULT_PORT = 8080
         TOMCAT_HOSTNAME = 'localhost'
@@ -35,12 +35,21 @@ subprojects{
     }
 
     dependencies {
+
         compile "org.apache.logging.log4j:log4j-api:${LOG4J2_VERSION}"
         compile "org.apache.logging.log4j:log4j-core:${LOG4J2_VERSION}"
+        compile "org.apache.logging.log4j:log4j-slf4j-impl:${LOG4J2_VERSION}"
+
         compile "org.springframework:spring-core:${SPRING_VERSION}"
         compile "org.springframework:spring-jdbc:${SPRING_VERSION}"
         compile "org.springframework:spring-context:${SPRING_VERSION}"
-        compile "org.springframework:spring-webmvc:${SPRING_VERSION}"
+
+        compile "org.apache.camel:camel-core:${CAMEL_VERSION}"
+        compile "org.apache.camel:camel-restlet:${CAMEL_VERSION}"
+        compile "org.apache.camel:camel-spring:${CAMEL_VERSION}"
+        compile "org.apache.camel:camel-jackson:${CAMEL_VERSION}"
+
+        compile group: 'org.restlet.jee', name: 'org.restlet.ext.spring', version: '2.3.9'
 
         testCompile "junit:junit:${JUNIT_VERSION}"
         testCompile "org.springframework:spring-test:${SPRING_VERSION}"

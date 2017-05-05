@@ -1,7 +1,5 @@
 rootProject.name = 'department-g'
 include 'dao'
 include 'model'
-include 'service'
 include 'rest'
-include 'webapp'
 

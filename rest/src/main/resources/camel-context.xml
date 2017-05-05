@@ -1,0 +1,100 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                            http://www.springframework.org/schema/context
+                            http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                            http://www.springframework.org/schema/jdbc
+                            http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+                            http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+    <jdbc:embedded-database id="dataSource" type="HSQL">
+        <jdbc:script location="classpath:create-db.sql"/>
+        <jdbc:script location="classpath:insert-data.sql"/>
+    </jdbc:embedded-database>
+
+    <bean id="departmentDAO" class="com.pai.dao.DepartmentMybatisDAO">
+    </bean>
+
+    <bean id="employeeDAO" class="com.pai.dao.EmployeeMybatisDAO">
+    </bean>
+
+    <bean id="RestletComponent" class="org.restlet.Component"/>
+
+    <bean id="RestletComponentService" class="org.apache.camel.component.restlet.RestletComponent">
+        <constructor-arg ref="RestletComponent" />
+    </bean>
+
+    <camelContext xmlns="http://camel.apache.org/schema/spring">
+
+        <restConfiguration bindingMode="json" component="restlet" />
+
+        <rest produces="application/json" consumes="application/json">
+
+            <!-- All about department-->
+
+            <!-- Get all departments-->
+            <get uri="/department">
+                <to uri="direct:getDepartments"/>
+            </get>
+
+            <!-- Get department by {id}-->
+            <get uri="/department/{id}">
+                <to uri="direct:getDepartmentById"/>
+            </get>
+
+            <!-- Add new department-->
+            <post uri="/department" type="com.pai.model.Department">
+                <to uri="direct:addDepartment"/>
+            </post>
+
+            <!-- Update department-->
+            <put uri="/department" type="com.pai.model.Department">
+                <to uri="direct:updateDepartment"/>
+            </put>
+
+            <!-- Delete department by {id}-->
+            <delete uri="/department/{id}">
+                <to uri="direct:deleteDepartment"/>
+            </delete>
+
+        </rest>
+
+        <route>
+            <from uri="direct:getDepartments"/>
+            <bean ref="departmentDAO" method="getAll"/>
+        </route>
+
+        <route>
+            <from uri="direct:getDepartmentById"/>
+            <bean ref="departmentDAO" method="getById(${header.id})"/>
+        </route>
+
+        <route>
+            <from uri="direct:addDepartment"/>
+            <bean ref="departmentDAO" method="create"/>
+            <setBody>
+                <simple>Success!</simple>
+            </setBody>
+        </route>
+
+        <route>
+            <from uri="direct:updateDepartment"/>
+            <bean ref="departmentDAO" method="update"/>
+            <setBody>
+                <simple>Success!</simple>
+            </setBody>
+        </route>
+
+        <route>
+            <from uri="direct:deleteDepartment"/>
+            <bean ref="departmentDAO" method="delete(${header.id})"/>
+        </route>
+
+    </camelContext>
+
+
+</beans>
