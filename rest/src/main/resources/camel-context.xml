@@ -1,12 +1,9 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                             http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-                            http://www.springframework.org/schema/context
-                            http://www.springframework.org/schema/context/spring-context-3.0.xsd
                             http://www.springframework.org/schema/jdbc
                             http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
                             http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
@@ -16,11 +13,9 @@
         <jdbc:script location="classpath:insert-data.sql"/>
     </jdbc:embedded-database>
 
-    <bean id="departmentDAO" class="com.pai.dao.DepartmentMybatisDAO">
-    </bean>
+    <bean id="departmentDAO" class="com.pai.dao.DepartmentMybatisDAO" />
 
-    <bean id="employeeDAO" class="com.pai.dao.EmployeeMybatisDAO">
-    </bean>
+    <bean id="employeeDAO" class="com.pai.dao.EmployeeMybatisDAO" />
 
     <bean id="RestletComponent" class="org.restlet.Component"/>
 
@@ -33,8 +28,6 @@
         <restConfiguration bindingMode="json" component="restlet" />
 
         <rest produces="application/json" consumes="application/json">
-
-            <!-- All about department-->
 
             <!-- Get all departments-->
             <get uri="/department">
@@ -59,6 +52,36 @@
             <!-- Delete department by {id}-->
             <delete uri="/department/{id}">
                 <to uri="direct:deleteDepartment"/>
+            </delete>
+
+            <!-- Get employees by department {id}-->
+            <get uri="/department/{id}/employee">
+                <to uri="direct:getEmployeesByDepartmentId"/>
+            </get>
+
+            <!-- Get employee by {id}-->
+            <get uri="/employee/{id}">
+                <to uri="direct:getEmployeeById"/>
+            </get>
+
+            <!-- Get all employees-->
+            <get uri="/employee">
+                <to uri="direct:getEmployees"/>
+            </get>
+
+            <!-- Add new employee-->
+            <post uri="/employee" type="com.pai.model.Employee">
+                <to uri="direct:addEmployee"/>
+            </post>
+
+            <!-- Update employee-->
+            <put uri="/employee" type="com.pai.model.Employee">
+                <to uri="direct:updateEmployee"/>
+            </put>
+
+            <!-- Delete employee by {id}-->
+            <delete uri="/employee/{id}">
+                <to uri="direct:deleteEmployee"/>
             </delete>
 
         </rest>
@@ -92,6 +115,42 @@
         <route>
             <from uri="direct:deleteDepartment"/>
             <bean ref="departmentDAO" method="delete(${header.id})"/>
+        </route>
+
+        <route>
+            <from uri="direct:getEmployees"/>
+            <bean ref="employeeDAO" method="getAll"/>
+        </route>
+
+        <route>
+            <from uri="direct:getEmployeesByDepartmentId"/>
+            <bean ref="employeeDAO" method="getByDepartmentId(${header.id})"/>
+        </route>
+
+        <route>
+            <from uri="direct:getEmployeeById"/>
+            <bean ref="employeeDAO" method="getById(${header.id})"/>
+        </route>
+
+        <route>
+            <from uri="direct:addEmployee"/>
+            <bean ref="employeeDAO" method="create"/>
+            <setBody>
+                <simple>Success!</simple>
+            </setBody>
+        </route>
+
+        <route>
+            <from uri="direct:updateEmployee"/>
+            <bean ref="employeeDAO" method="update"/>
+            <setBody>
+                <simple>Success!</simple>
+            </setBody>
+        </route>
+
+        <route>
+            <from uri="direct:deleteEmployee"/>
+            <bean ref="employeeDAO" method="delete(${header.id})"/>
         </route>
 
     </camelContext>

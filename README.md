@@ -1,11 +1,9 @@
-Department (Gradle)
-===================
+Department (Camel-Restlet)
+==========================
 
-The project consists of two cooperating applications, designed to work with information about employees and departments.
+The project consists application, designed to work with information about employees and departments.
 
-**departmentrest.war** — REST service providing access to a database of employees and departments.
-
-**departmentweb.war** — Web application providing an interface for working with the REST service.
+**departmentrest.war** — REST service (Camel-restlet) providing access to a database of employees and departments.
 
 Usage
 -----
@@ -33,20 +31,23 @@ Use comands:
     $ gradle :rest:cargoUndeployRemote
     $ gradle :rest:cargoRedeployRemote
 
-    $ gradle :webapp:cargoDeployRemote
-    $ gradle :webapp:cargoUndeployRemote
-    $ gradle :webapp:cargoRedeployRemote
-
 Access addresses:
 
 **departmentrest.war**
 
-    http://localhost:8080/departmentrest/department
-    http://localhost:8080/departmentrest/employee
+    http://localhost:8080/departmentrest/department - get all departments [GET]
+    http://localhost:8080/departmentrest/department - update department [PUT]
+    http://localhost:8080/departmentrest/department - add new department [POST]
+    http://localhost:8080/departmentrest/department/{id} - get department with id={id} [GET]
+    http://localhost:8080/departmentrest/department/{id} - delete department with id={id} [DELETE]
+    http://localhost:8080/departmentrest/department/{id}/employee - get emplyees from department with id={id} [GET]
+    http://localhost:8080/departmentrest/employee - get all employees [GET]
+    http://localhost:8080/departmentrest/employee - update employee [PUT]
+    http://localhost:8080/departmentrest/employee - add new employee [POST]
+    http://localhost:8080/departmentrest/employee/{id} - get employee with id={id} [GET]
+    http://localhost:8080/departmentrest/employee/{id} - delete employee with id={id} [DELETE]
 
-**departmentweb.war**
 
-    http://localhost:8080/departmentweb/departments
 
 by Aliaksandr Parfianiuk
 
